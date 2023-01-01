@@ -8,28 +8,29 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
+  const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=c4930fc21f87714b5934277f202b2a9f&page=1'
+  const IMG_PATH = `https://image.tmdb.org/t/p/w1280`
+  const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?api_key=c4930fc21f87714b5934277f202b2a9f&query=${search}`
+  const OMDB_URL =`http://www.omdbapi.com/?i=tt3896198&apikey=35c46830&s=${search}`
 
 
   useEffect(() => {
     // setSearch('avengers')
 
     if(search){
-      axios.get(`http://www.omdbapi.com/?i=tt3896198&apikey=35c46830&s=${search}`)
+      axios.get(SEARCH_URL)
         .then((response) => {
-          if(response.data.Response === 'True'){
-            console.log(response.data);
-            setMovies(response.data.Search)
-            setError('');
-          }else{
-            setError('No Movies Found');
-            console.log(response.data);
-            setMovies([])
-          }
-          
+          console.log(response.data);
+          setMovies(response.data.results);
+          setError('');
+        
         })
         .catch((error) =>  {
-          console.log(error)
-          setError(error)
+          console.log(error);
+          setError(error);
+          // setError('No Movies Found');
+          setMovies([]);
+
         })
     }
   }, [search])
@@ -59,12 +60,12 @@ const App = () => {
         {movies.map((movie) => (
           <div className="movie-container">
           <div className="poster-div">
-            {movie.Poster != 'N/A' ? (<img src={movie.Poster} alt="" />) : (<img src={noimage} alt="" />)}
+            {movie.poster_path != null ? (<img src={IMG_PATH .concat(movie.poster_path)} alt="" />) : (<img src={noimage} alt="" />)}
             
           </div>
           <div className="movie-text-div">
             <div className="h1-div">
-              <h1 className="movie-title">{movie.Title}</h1>
+              <h1 className="movie-title">{movie.title}</h1>
             </div>
             
             <div className="minor-text">
