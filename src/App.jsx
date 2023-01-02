@@ -11,14 +11,14 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
   const IMG_PATH = `https://image.tmdb.org/t/p/w1280`
-  const OMDB_URL =`http://www.omdbapi.com/?i=tt3896198&apikey=35c46830&s=${search}`
+  // const OMDB_URL =`http://www.omdbapi.com/?i=tt3896198&apikey=35c46830&s=${search}`
   const divRef = useRef(null)
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [pageNumber, setPageNumber] = useState(0);
   const API_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=c4930fc21f87714b5934277f202b2a9f&page=${pageNumber + 1}`
   const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?api_key=c4930fc21f87714b5934277f202b2a9f&page=${pageNumber + 1}&query=${search}`
-  const [searchChanged, setSearchChanged] = useState(false)
+
 
 
 
@@ -28,10 +28,9 @@ const App = () => {
     if(search != ''){
       axios.get(SEARCH_URL)
         .then((response) => {
-          console.log(response.data.total_pages);
+          // console.log(response.data.total_pages);
           setMovies(response.data.results);
           setError('');
-          // setPageNumber(1);
           if(response.data.total_pages < 100){
             setPageCount(response.data.total_pages)
   
@@ -39,11 +38,10 @@ const App = () => {
             setPageCount(100)
           }
           
-          console.log(typeof(response.data.total_pages))
         
         })
         .catch((error) =>  {
-          console.log(error);
+          // console.log(error);
           setError(error);
           // setError('No Movies Found');
           setMovies([]);
@@ -55,15 +53,18 @@ const App = () => {
         console.log(response.data);
         setMovies(response.data.results);
         setError('');
+        
         if(response.data.total_pages < 100){
           setPageCount(response.data.total_pages)
+
         }else{
           setPageCount(300)
         }
-        console.log(typeof(response.data.total_pages))
+
       })
+
       .catch((error) =>  {
-        console.log(error);
+        // console.log(error);
         setError(error);
         // setError('No Movies Found');
         setMovies([]);
@@ -105,7 +106,6 @@ const App = () => {
                 }
                 scrollToTop()
                 setPageNumber(0)
-                // setSearchChanged(true)
               }        
           }} />
 
