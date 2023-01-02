@@ -115,6 +115,8 @@ const App = () => {
             pageRangeDisplayed={1}
             onPageChange={handlePageChange}
             containerClassName="pagination"
+            marginPagesDisplayed={0.1}
+            // forcePage={page}
             previousClassName="previous"
             nextClassName="next"
             pageClassName="page"

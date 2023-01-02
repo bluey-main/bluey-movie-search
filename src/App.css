@@ -19,6 +19,7 @@
     min-height: 100vh;
     /* background-color: brown; */
     background-color: var(--CharCoal);
+    overflow-x: hidden;
 }
 
 .search-section{
