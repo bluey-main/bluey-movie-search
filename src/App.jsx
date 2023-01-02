@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     // setSearch('avengers')
 
-    if(search){
+    if(search != ''){
       axios.get(SEARCH_URL)
         .then((response) => {
           console.log(response.data);
@@ -32,6 +32,21 @@ const App = () => {
           setMovies([]);
 
         })
+    }else{
+      axios.get(API_URL)
+      .then((response) => {
+        console.log(response.data);
+        setMovies(response.data.results);
+        setError('');
+      
+      })
+      .catch((error) =>  {
+        console.log(error);
+        setError(error);
+        // setError('No Movies Found');
+        setMovies([]);
+
+      })
     }
   }, [search])
 
