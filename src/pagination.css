@@ -16,13 +16,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
+    min-width: 60px;
     height: 40px;
     background: transparent;
     color: var(--Yellow);
     border: solid 3px var(--Yellow);
     cursor: pointer;
     user-select: none;
+    padding: 20px;
   }
   
   .previous:hover,
