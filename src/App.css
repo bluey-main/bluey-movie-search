@@ -68,6 +68,23 @@ input::placeholder{
 
 }
 
+.overview-div{
+    width: 100%;
+    height: 70%;
+    background-color: var(--CharCoal);
+    position: absolute;
+    bottom: 0;
+    transform: translateY(300px);
+    transition: ease-in-out 0.2s;
+    padding: 20px;
+
+}
+
+.overview-div p{
+    font-size: 1.2em;
+    color: var(--Yellow);
+}
+
 .movie-container{
     width: 18rem;
     height: 25rem;
@@ -79,6 +96,10 @@ input::placeholder{
     overflow: hidden;
     border: var(--Yellow) solid 2px;
     
+}
+
+.movie-container:hover .overview-div{
+    transform: translateY(0);
 }
 
 .poster-div{

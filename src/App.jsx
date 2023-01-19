@@ -28,9 +28,11 @@ const App = () => {
     if(search != ''){
       axios.get(SEARCH_URL)
         .then((response) => {
-          // console.log(response.data.total_pages);
+          
           setMovies(response.data.results);
           setError('');
+          console.log(response.data.results)
+
           if(response.data.total_pages < 100){
             setPageCount(response.data.total_pages)
   
@@ -50,7 +52,8 @@ const App = () => {
     }else{
       axios.get(API_URL)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data.total_pages);
+        console.log(response.data.results);
         setMovies(response.data.results);
         setError('');
         
@@ -132,20 +135,26 @@ const App = () => {
         
         {movies.map((movie) => (
           <div className="movie-container">
-          <div className="poster-div">
-            {movie.poster_path != null ? (<img src={IMG_PATH .concat(movie.poster_path)} alt="" />) : (<img src={noimage} alt="" />)}
-            
-          </div>
-          <div className="movie-text-div">
-            <div className="h1-div">
-              <h1 className="movie-title">{movie.title}</h1>
+            <div className="overview-div">
+              <p>{movie.overview}</p>
+            </div>
+            <div className="poster-div">
+              {movie.poster_path != null ? (<img src={IMG_PATH .concat(movie.poster_path)} alt="" />) : (<img src={noimage} alt="" />)}
+
+              
+            </div>
+            <div className="movie-text-div">
+              
+              <div className="h1-div">
+                <h1 className="movie-title">{movie.title}</h1>
+              </div>
+              
+              <div className="minor-text">
+                <p className="movie-year">Date: {movie.release_date}</p>
+                <p className="movie-type">Rating: {movie.vote_average}</p>
+              </div>
             </div>
             
-            <div className="minor-text">
-              <p className="movie-year">Date: {movie.release_date}</p>
-              <p className="movie-type">Rating: {movie.vote_average}</p>
-            </div>
-          </div>
         </div>
         ))}
       </div>
